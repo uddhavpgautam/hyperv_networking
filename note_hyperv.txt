@@ -1,0 +1,33 @@
+3 physical nics
+	1) Lan wired  --- only this NIC is hyver-v switch enabled
+	2) Wifi inbuilt in motherboard
+	3) External NIC connected via USB
+
+
+I created 3 bridges. Therefore, total 4 bridges including default created by system, which is for natting and it uses default swtich. D
+During installation, system auto selects which physicl nic the default switch gonna listen on. In my case, it is internal (wifi build in motherboad) nic
+
+Now, I have two more physical NICs. Although, I can also use internal (wifi built in motherboard) nic too, because system allows to share to management OS.
+
+I created external hyper-v switch and make it listen on Lan wired nic. 
+
+I also created internal and private virtual switches. They don't listen to nobody. 
+
+I put external virtual switch and internal virtual switch connected via the same virtual bridge. 
+
+Lan wired nic ---- external switch ---- bridge --- internal switch ---- inside VM guest system (Vmnic2)     Note: VMnic means virtual machine nic
+Wifi inbuilt in motherboard -- nat -- default virtual switch -- inside VM guest system (Vmnic1)
+
+
+
+
+External NIC connected via USB is kind of useless (more than needed to me)
+
+
+Only with LAN wired NIC, I (as host machine) can't access internet. But my virtual machines can access if they used via this 
+Lan wired nic ---- external switch ---- bridge --- internal switch ---- inside VM guest system (Vmnic2)
+
+With ifi inbuilt in motherboard, I can connect both host and guest systems. 
+
+
+With external NIC connected via usb, I can only connect guest to the internet. 
